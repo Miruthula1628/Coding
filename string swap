@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class SwapStrings {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter first string (a): ");
+        String a = scanner.next();
+
+        System.out.print("Enter second string (b): ");
+        String b = scanner.next();
+
+        a = a + b;
+        b = a.substring(0, a.length() - b.length());
+        a = a.substring(b.length());
+
+        System.out.println("After swapping: a = " + a + ", b = " + b);
+
+        scanner.close();
+    }
+}
