@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class DeleteCharacter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String text = scanner.nextLine();
+
+        System.out.print("Enter the character to delete: ");
+        String target = scanner.next();
+
+        String result = text.replace(target, "");
+
+        System.out.println("Modified string: " + result);
+
+        scanner.close();
+    }
+}
