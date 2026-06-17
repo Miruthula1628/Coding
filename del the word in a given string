@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class DeleteWordManual {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a string: ");
+        String text = scanner.nextLine();
+
+        System.out.print("Enter the word to delete: ");
+        String targetWord = scanner.next();
+
+        StringBuilder result = new StringBuilder();
+        StringBuilder currentWord = new StringBuilder();
+
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+
+            if (ch == ' ' || i == text.length() - 1) {
+                if (ch != ' ') {
+                    currentWord.append(ch);
+                }
+
+                if (!currentWord.toString().equals(targetWord)) {
+                    if (result.length() > 0 && currentWord.length() > 0) {
+                        result.append(" ");
+                    }
+                    result.append(currentWord);
+                }
+                currentWord.setLength(0);
+            } else {
+                currentWord.append(ch);
+            }
+        }
+
+        System.out.println("Modified string: " + result.toString());
+        scanner.close();
+    }
+}
