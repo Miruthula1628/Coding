@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Solution {
+    public int lengthOfFirstWord(String s) {
+        int length = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') {
+                length++;
+            } else if (length > 0) {
+                return length;
+            }
+        }
+        return length;
+    }
+
+    public static void main(String[] args) {
+        Solution solver = new Solution();
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter a string: ");
+        String userInput = scanner.nextLine(); 
+        
+        int result = solver.lengthOfFirstWord(userInput);
+        System.out.println("The length of the first word is: " + result);
+        
+        scanner.close();
+    }
+}
