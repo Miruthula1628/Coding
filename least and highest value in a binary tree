@@ -1,0 +1,74 @@
+import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class BinaryTreeMinMax {
+    private int minVal = Integer.MAX_VALUE;
+    private int maxVal = Integer.MIN_VALUE;
+
+    public void findMinMax(TreeNode root) {
+        if (root == null) return;
+        
+        if (root.val < minVal) minVal = root.val;
+        if (root.val > maxVal) maxVal = root.val;
+        
+        findMinMax(root.left);
+        findMinMax(root.right);
+    }
+
+    public static TreeNode buildTreeFromLevelOrder(String[] arr) {
+        if (arr.length == 0 || arr[0].equals("null")) return null;
+        
+        TreeNode root = new TreeNode(Integer.parseInt(arr[0]));
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        
+        int i = 1;
+        while (!queue.isEmpty() && i < arr.length) {
+            TreeNode curr = queue.poll();
+            
+            if (!arr[i].equals("null")) {
+                curr.left = new TreeNode(Integer.parseInt(arr[i]));
+                queue.add(curr.left);
+            }
+            i++;
+            
+            if (i < arr.length && !arr[i].equals("null")) {
+                curr.right = new TreeNode(Integer.parseInt(arr[i]));
+                queue.add(curr.right);
+            }
+            i++;
+        }
+        return root;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter binary tree elements in level-order (space-separated, use 'null' for empty nodes):");
+        String input = scanner.nextLine();
+        
+        String[] arr = input.split(" ");
+        TreeNode root = buildTreeFromLevelOrder(arr);
+        
+        if (root == null) {
+            System.out.println("The tree is empty.");
+        } else {
+            BinaryTreeMinMax solver = new BinaryTreeMinMax();
+            solver.findMinMax(root);
+            System.out.println("Least element: " + solver.minVal);
+            System.out.println("Highest element: " + solver.maxVal);
+        }
+        
+        scanner.close();
+    }
+}
