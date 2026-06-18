@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number (n): ");
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter an integer.");
+            scanner.close();
+            return;
+        }
+        int n = scanner.nextInt();
+
+        boolean found = false;
+
+        for (int d = 0; d * d <= n; d++) {
+            int remainder = n - (d * d);
+            int k = 1;
+
+            while (true) {
+                long kkValue = (long) Math.pow(k, k);
+
+                if (kkValue == remainder) {
+                    System.out.println("Found match!");
+                    System.out.println(n + " - " + d + "^2 = " + remainder + " (which is " + k + "^" + k + ")");
+                    found = true;
+                    break;
+                }
+
+                if (kkValue > remainder) {
+                    break;
+                }
+                k++;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No valid d and k combination satisfies n - d^2 = k^k for this number.");
+        }
+
+        scanner.close();
+    }
+}
