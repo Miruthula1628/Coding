@@ -1,0 +1,36 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter number of digits: ");
+        int n = scanner.nextInt();
+
+        int[] dig = new int[n];
+        System.out.println("Enter the digits separated by spaces:");
+        for (int i = 0; i < n; i++) {
+            dig[i] = scanner.nextInt();
+        }
+
+        int[] a = po(dig); 
+        
+        System.out.println("Result: " + Arrays.toString(a));
+        scanner.close();
+    }
+
+    public static int[] po(int[] dig) { 
+        for (int i = dig.length - 1; i >= 0; i--) { 
+            if (dig[i] < 9) {
+                dig[i]++;
+                return dig;
+            }
+            dig[i] = 0;
+        }
+
+        int[] newDigits = new int[dig.length + 1];
+        newDigits[0] = 1;
+        return newDigits;
+    }
+}
